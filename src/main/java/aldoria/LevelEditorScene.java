@@ -87,6 +87,7 @@ public class LevelEditorScene extends Scene{
     };
 
     private int vaoID, vboID, eboID;
+    private int count = 0;
 
     public LevelEditorScene(){
 
@@ -177,6 +178,11 @@ public class LevelEditorScene extends Scene{
     @Override
     public void update(float dt) {
 
+        count ++;
+        if (count >= 120) {
+            System.out.println("Upate méthode : " + count);
+            count = 0;
+        }
 
         glUseProgram(shaderProgram);
 

@@ -97,9 +97,8 @@ public class Window {
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
         // Setup version OpenGL
         glfwWindowHint(GLFW_SAMPLES, GLFW_TRUE); // 4x antialiasing
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // OpenGL 3.3
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE); // to make MacOS happy
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); // OpenGL 3.3
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 
@@ -160,6 +159,10 @@ public class Window {
             glClearColor(r, g, b, a);
             // Clear the buffer
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            if(dt >= 0){
+                currentScene.update(dt);
+            }
 
             glfwSwapBuffers(glfwWindow);
 
