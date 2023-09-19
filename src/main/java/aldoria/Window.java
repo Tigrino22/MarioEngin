@@ -32,9 +32,9 @@ public class Window {
         this.width = 1920;
         this.height = 1080;
         this.title = "Mario";
-        this.r = 0;
-        this.g = 0;
-        this.b = 0;
+        this.r = 1;
+        this.g = 1;
+        this.b = 1;
         this.a = 0;
 
     }
@@ -97,10 +97,9 @@ public class Window {
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
         // Setup version OpenGL
         glfwWindowHint(GLFW_SAMPLES, GLFW_TRUE); // 4x antialiasing
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); // OpenGL 3.3
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); // OpenGL 4.1
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
 
 
         // Create the window
@@ -108,8 +107,6 @@ public class Window {
         if (glfwWindow == NULL){
             throw new RuntimeException("Failed to create GLFW Window");
         }
-
-
 
 
         // Set Mouse listener Callback
@@ -122,7 +119,6 @@ public class Window {
 
         // Make the OpenGL context current
         glfwMakeContextCurrent(glfwWindow);
-
 
         // Enable v-sync
         glfwSwapInterval(1);
@@ -144,6 +140,16 @@ public class Window {
 
     }
 
+    private void countFps(float dt, int count, int fps){
+
+        fps = (int)(1 / dt);
+        if(count >= 30){
+            System.out.println("FPS : " + fps);
+            count = 0;
+        }
+        count++;
+    }
+
     private void loop() {
         float beginTime = Time.getTime();
         float endTime = Time.getTime();
@@ -163,6 +169,7 @@ public class Window {
             if(dt >= 0){
                 currentScene.update(dt);
             }
+            countFps(dt, 0, 0);
 
             glfwSwapBuffers(glfwWindow);
 
